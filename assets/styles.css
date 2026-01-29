@@ -1,107 +1,136 @@
 :root {
-  --bg-void: #050505;
-  --blood-red: #880808;
-  --wine-deep: #430404;
-  --bone: #C9C1C1; /* Steampunk/Bone color for text */
-  --shadow-line: rgba(136, 8, 8, 0.2);
+  --bg-void: #020202;
+  --gold-leaf: #d4af37;
+  --blood-wine: #880808;
+  --bone: #C9C1C1;
+  --glass: rgba(255, 255, 255, 0.03);
 }
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
 
 body {
   background-color: var(--bg-void);
   color: var(--bone);
   font-family: 'Inter', sans-serif;
-  margin: 0;
+  overflow-x: hidden;
 }
 
-/* Alchemy Italic Glow */
-.italic-glow {
-  font-family: 'Playfair Display', serif;
-  font-style: italic;
-  color: var(--blood-red);
-  text-shadow: 0 0 15px rgba(136, 8, 8, 0.4);
+/* Texture overlay */
+.grain {
+  position: fixed;
+  top: 0; left: 0; width: 100%; height: 100%;
+  background: url('https://upload.wikimedia.org/wikipedia/commons/7/76/1k_filmgrain.png');
+  opacity: 0.05; pointer-events: none; z-index: 100;
 }
 
-.kicker {
-  color: var(--blood-red);
-  text-transform: uppercase;
-  letter-spacing: 4px;
-  font-size: 0.7rem;
-  font-weight: 600;
+/* Nav Styles */
+.nav {
+  display: flex; justify-content: space-between;
+  padding: 40px 6%; position: fixed; width: 100%; z-index: 1000;
 }
 
 .brand {
-  font-weight: 600;
-  color: var(--bone);
-  text-decoration: none;
-  letter-spacing: 2px;
+  text-decoration: none; color: var(--gold-leaf);
+  font-weight: 600; letter-spacing: 4px; font-size: 1.1rem;
 }
 
-.dot { color: var(--blood-red); }
+.links a {
+  text-decoration: none; color: var(--bone);
+  margin-left: 30px; font-size: 0.8rem; text-transform: uppercase;
+  letter-spacing: 2px; transition: 0.3s;
+}
 
-/* Cloudinary Video Styling - High Contrast */
+.links a:hover { color: var(--gold-leaf); }
+
+/* Hero Section */
+.hero {
+  height: 100vh; display: flex; align-items: center;
+  padding: 0 6%; position: relative;
+}
+
+.title {
+  font-size: clamp(3rem, 8vw, 6rem); line-height: 0.9;
+  font-weight: 300; margin-bottom: 2rem; color: white;
+}
+
+.italic-glow {
+  font-family: 'Playfair Display', serif; font-style: italic;
+  color: var(--gold-leaf); text-shadow: 0 0 20px rgba(212, 175, 55, 0.3);
+}
+
+.kicker {
+  color: var(--blood-wine); text-transform: uppercase;
+  letter-spacing: 5px; font-size: 0.7rem; margin-bottom: 1rem;
+}
+
+.sub { max-width: 450px; font-weight: 300; color: #888; }
+
+/* The Sigil Watermark */
+.sigil-watermark {
+  position: absolute; left: 10%; top: 50%; transform: translateY(-50%);
+  width: 500px; height: 500px;
+  background: url('../img/sigil_gold.png') no-repeat center;
+  background-size: contain; opacity: 0.07; filter: blur(2px);
+  z-index: -1; animation: breath 10s infinite ease-in-out;
+}
+
+@keyframes breath {
+  0%, 100% { transform: translateY(-50%) scale(1); opacity: 0.05; }
+  50% { transform: translateY(-50%) scale(1.05); opacity: 0.1; }
+}
+
+/* Video Background */
 .hero_media {
-  position: absolute;
-  top: 0; right: 0;
-  width: 55%; height: 100%;
-  z-index: -1;
-  border-left: 1px solid var(--shadow-line);
+  position: absolute; top: 0; right: 0; width: 55%; height: 100%; z-index: -2;
 }
 
 .cloudinary-video {
-  width: 100%; height: 100%;
-  object-fit: cover;
-  filter: contrast(120%) brightness(0.7) saturate(0.8);
+  width: 100%; height: 100%; object-fit: cover;
+  filter: contrast(110%) brightness(0.6) grayscale(30%);
 }
 
-/* This blends the video into the black background */
 .vignette {
-  position: absolute;
-  top: 0; left: 0;
-  width: 100%; height: 100%;
-  background: linear-gradient(to right, var(--bg-void) 5%, transparent 60%);
+  position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+  background: linear-gradient(to right, var(--bg-void) 10%, transparent 80%);
 }
 
+/* Buttons */
 .btn.primary {
-  background: var(--blood-red);
-  color: white;
-  padding: 18px 40px;
-  text-decoration: none;
-  font-size: 0.8rem;
-  letter-spacing: 2px;
-  text-transform: uppercase;
-  display: inline-block;
-  border: 1px solid var(--blood-red);
-  transition: 0.4s;
+  display: inline-block; padding: 18px 45px;
+  border: 1px solid var(--gold-leaf); color: var(--gold-leaf);
+  text-decoration: none; text-transform: uppercase;
+  letter-spacing: 3px; font-size: 0.7rem; transition: 0.5s;
 }
 
 .btn.primary:hover {
-  background: transparent;
-  box-shadow: 0 0 20px var(--shadow-line);
+  background: var(--gold-leaf); color: black;
+  box-shadow: 0 0 30px rgba(212, 175, 55, 0.3);
 }
 
-/* Archive Cards - Alchemy Style */
-.card {
-  background: #0a0a0a;
-  padding: 40px;
-  border: 1px solid #111;
-  position: relative;
-  overflow: hidden;
-}
-
-.card-line {
-  position: absolute;
-  top: 0; left: 0;
-  width: 2px; height: 100%;
-  background: var(--blood-red);
-  opacity: 0.5;
-}
-
+/* Archive Cards */
+.section { padding: 120px 6%; }
 .label {
-  color: var(--blood-red);
-  font-size: 0.6rem;
-  text-transform: uppercase;
-  letter-spacing: 5px;
-  margin-bottom: 40px;
-  border-bottom: 1px solid #1a1a1a;
-  padding-bottom: 10px;
+  color: var(--blood-wine); font-size: 0.65rem; text-transform: uppercase;
+  letter-spacing: 6px; margin-bottom: 60px; border-bottom: 1px solid #1a1a1a;
+  padding-bottom: 15px;
 }
+
+.grid { display: grid; grid-template-columns: 1fr 1fr; gap: 30px; }
+
+.card {
+  background: var(--glass); padding: 60px; border: 1px solid #111;
+  backdrop-filter: blur(10px); position: relative; transition: 0.5s;
+}
+
+.card:hover { border-color: var(--gold-leaf); transform: translateY(-10px); }
+
+.card-accent {
+  position: absolute; top: 0; left: 0; width: 3px; height: 100%;
+  background: var(--blood-wine);
+}
+
+.card h3 { font-family: 'Playfair Display', serif; font-size: 1.8rem; margin-bottom: 15px; }
+.card p { color: #888; font-size: 0.95rem; }
+.card-year { font-size: 0.7rem; color: var(--gold-leaf); letter-spacing: 2px; }
+
+.footer { padding: 60px 6%; border-top: 1px solid #111; font-size: 0.6rem; color: #444; letter-spacing: 3px; }
