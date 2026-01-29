@@ -1,68 +1,52 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>MILA TINA | Somatic Archive</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@200;400&family=Playfair+Display:ital,wght@1,400&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="./assets/styles.css" />
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MILA TINA | BioSymbiosis</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400&family=JetBrains+Mono:wght@200;400&display=swap" rel="stylesheet">
 </head>
-<body class="somatic-experience">
+<body class="loading">
 
-  <div class="video-background">
-    <video autoplay muted loop playsinline>
-      <source src="https://res.cloudinary.com/da2vrqdfr/video/upload/v1769661861/mila-tina-symbiotrix_vy4coj.mp4" type="video/mp4">
-    </video>
-    <div class="overlay-texture"></div>
-  </div>
+    <div id="loader"><span>INITIALIZING_SYSTEM...</span></div>
 
-  <header class="art-nav">
-    <div class="brand">MILA TINA</div>
-    <div class="status">SYSTEMIC LANGUAGE RECALIBRATION // 2026</div>
-  </header>
-
-  <div class="horizontal-scroll-wrapper">
-    <div class="horizontal-content">
-      
-      <section class="panel intro">
-        <h1 class="hero-text">Rhythm is <br><span class="glow-serif">Presence.</span></h1>
-        <p class="manifesto">A multisensory investigation into frequency, body, and the architecture of sound.</p>
-        <div class="scroll-indicator">SCROLL TO ENTER —></div>
-      </section>
-
-      <section class="panel sigil-break">
-        <div class="floating-sigil"></div>
-      </section>
-
-      <section class="panel work-item">
-        <div class="glass-card">
-          <span class="label">Archive // 01</span>
-          <h2>Symbiotrix</h2>
-          <p>The intersection of technological pulse and human heartbeat.</p>
-          <a href="#contact" class="inquire-trigger">Enquire</a>
+    <nav>
+        <div class="logo">MILA TINA</div>
+        <div class="nav-links">
+            <a href="#archive">ARCHIVE</a>
+            <a href="#logic">BIO-LOGIC</a>
+            <button id="lang-toggle">FR / EN</button>
         </div>
-      </section>
+    </nav>
 
-      <section class="panel work-item">
-        <div class="glass-card">
-          <span class="label">Archive // 02</span>
-          <h2>Mujer Luna</h2>
-          <p>Decolonizing the rhythmic body through ancestral resonance.</p>
+    <section id="hero">
+        <div id="meta-display">
+            <p>// IDENTITY: <span class="white">MILA TINA</span></p>
+            <p>// ROLE: <span class="white">INTERDISCIPLINARY ARTIST | EXPERIENCE DESIGNER</span></p>
+            <p>// STATUS: <span class="bio-green">ACTIVE_STREAMING_BPM</span></p>
         </div>
-      </section>
 
-      <section class="panel inquiry">
-        <div class="glass-card large">
-          <h2 class="glow-serif">Inquiry</h2>
-          <div id="17hats-container">
-            <p class="fine-print">Initiating institutional contact...</p>
-          </div>
+        <div class="hero-content">
+            <h1 class="lang-en">BioSymbiosis</h1>
+            <h1 class="lang-fr" style="display:none;">BioSymbiose</h1>
+            <p class="tagline lang-en">A visceral dialogue between biological systems and digital architecture.</p>
+            <p class="tagline lang-fr" style="display:none;">Un dialogue viscéral entre les systèmes biologiques et l'architecture numérique.</p>
         </div>
-      </section>
 
-    </div>
-  </div>
-<div class="cursor-sigil"></div>
+        <canvas id="bio-canvas"></canvas>
+    </section>
+
+    <section id="statement">
+        <div class="container">
+            <h2 class="lang-en">The Vision</h2>
+            <h2 class="lang-fr" style="display:none;">La Vision</h2>
+            <p class="big-text lang-en">Mila Tina explores the invisible threads of human connection. Through real-time bio-data transmutation, she creates immersive installations that turn heartbeats into architectural symphonies.</p>
+            <p class="big-text lang-fr" style="display:none;">Mila Tina explore les fils invisibles de la connexion humaine. À travers la transmutation de bio-données en temps réel, elle crée des installations immersives qui transforment les battements de cœur en symphonies architecturales.</p>
+        </div>
+    </section>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <script src="script.js"></script>
 </body>
 </html>
