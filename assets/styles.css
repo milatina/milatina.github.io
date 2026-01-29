@@ -101,3 +101,36 @@ body {
 }
 
 .brand { color: var(--gold); font-weight: 600; }
+
+@media (max-width: 768px) {
+  /* Kill the rotation for mobile */
+  .horizontal-scroll-wrapper {
+    width: 100vw;
+    height: 100vh;
+    transform: none;
+    overflow-y: scroll;
+    overflow-x: hidden;
+  }
+
+  .horizontal-content {
+    flex-direction: column; /* Stack vertically for mobile */
+    width: 100vw;
+    transform: none;
+  }
+
+  .panel {
+    width: 100vw;
+    height: auto;
+    min-height: 80vh; /* Give space for video visibility */
+    padding: 60px 20px;
+  }
+
+  .glass-card {
+    width: 90vw; /* Almost full width on phone */
+    padding: 30px;
+  }
+
+  .hero-text {
+    font-size: 15vw; /* Make it massive on mobile */
+  }
+}
