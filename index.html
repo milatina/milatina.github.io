@@ -1,15 +1,156 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Mila Tina</title>
-  <meta name="description" content="Mila Tina — performance, rhythm, and embodied art.">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <meta name="description" content="Mila Tina. Performance, rhythm, presence. Drumming, movement, multisensory work." />
+  <meta property="og:title" content="Mila Tina" />
+  <meta property="og:description" content="Performance, rhythm, presence." />
+  <meta property="og:type" content="website" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="./assets/styles.css" />
 </head>
+
 <body>
+  <div class="grain" aria-hidden="true"></div>
+
+  <header class="nav">
+    <a class="brand" href="/">Mila Tina</a>
+    <nav class="links">
+      <a href="#work">Work</a>
+      <a href="#press">Press</a>
+      <a href="#contact">Contact</a>
+    </nav>
+  </header>
+
   <main>
-    <h1>Mila Tina</h1>
-    <p>Performance · Rhythm · Presence</p>
+    <section class="hero">
+      <div class="hero_inner">
+        <p class="kicker">Performance artist · Drummer · Experience designer</p>
+
+        <h1 class="title">
+          Rhythm as language.
+          <span class="title_soft">Presence as impact.</span>
+        </h1>
+
+        <p class="sub">
+          Multisensory performances blending drumming, movement, visual rhythm, and embodied storytelling.
+        </p>
+
+        <div class="cta_row">
+          <a class="btn primary" href="#contact">Inquire</a>
+          <a class="btn" href="#work">View work</a>
+        </div>
+
+        <ul class="meta">
+          <li>Available for festivals, museums, brand experiences</li>
+          <li>Based in NY · Touring-ready</li>
+        </ul>
+      </div>
+
+      <div class="hero_media" aria-label="Featured video">
+        <div class="video_shell">
+          <iframe
+            src="https://player.vimeo.com/video/123456789?h=abcdef1234&title=0&byline=0&portrait=0"
+            allow="autoplay; fullscreen; picture-in-picture"
+            allowfullscreen
+            title="Mila Tina Performance Reel"
+          ></iframe>
+        </div>
+
+        <p class="caption">60 second performance reel</p>
+      </div>
+    </section>
+
+    <section id="work" class="section">
+      <div class="section_head">
+        <h2>Selected work</h2>
+        <p>Projects and formats built for impact, intimacy, and scale.</p>
+      </div>
+
+      <div class="grid">
+        <article class="card">
+          <h3>Symbiotrix</h3>
+          <p>Body, technology, and emotion translated through rhythm, visuals, and movement.</p>
+          <a class="textlink" href="#contact">Book this format</a>
+        </article>
+
+        <article class="card">
+          <h3>Mujer Luna</h3>
+          <p>Feminine force across myth and lived experience, expressed through drums and physicality.</p>
+          <a class="textlink" href="#contact">Inquire</a>
+        </article>
+
+        <article class="card">
+          <h3>Festival set</h3>
+          <p>High-energy, cinematic arc built for large rooms and open air stages.</p>
+          <a class="textlink" href="#contact">Availability</a>
+        </article>
+      </div>
+    </section>
+
+    <section id="press" class="section">
+      <div class="section_head">
+        <h2>Press kit</h2>
+        <p>Quick links for curators, programmers, and collaborators.</p>
+      </div>
+
+      <div class="press">
+        <a class="pill" href="#" target="_blank" rel="noopener">Download EPK</a>
+        <a class="pill" href="#" target="_blank" rel="noopener">Stage plot</a>
+        <a class="pill" href="#" target="_blank" rel="noopener">Tech rider</a>
+        <a class="pill" href="#" target="_blank" rel="noopener">Hi-res photos</a>
+      </div>
+    </section>
+
+    <section id="contact" class="section contact">
+      <div class="section_head">
+        <h2>Contact</h2>
+        <p>Send a few details and I will respond with options and a quote.</p>
+      </div>
+
+      <form class="form" action="https://formspree.io/f/YOUR_FORM_ID" method="POST">
+        <div class="row">
+          <label>
+            Name
+            <input name="name" type="text" autocomplete="name" required />
+          </label>
+
+          <label>
+            Email
+            <input name="email" type="email" autocomplete="email" required />
+          </label>
+        </div>
+
+        <label>
+          Message
+          <textarea name="message" rows="6" placeholder="Date, location, budget range, and vibe."></textarea>
+        </label>
+
+        <button class="btn primary" type="submit">Send</button>
+
+        <p class="fine">
+          For urgent bookings: include “deadline” in the subject line.
+        </p>
+      </form>
+    </section>
+
+    <footer class="footer">
+      <p>© <span id="year"></span> Mila Tina</p>
+      <div class="footer_links">
+        <a href="https://instagram.com/" target="_blank" rel="noopener">Instagram</a>
+        <a href="https://youtube.com/" target="_blank" rel="noopener">YouTube</a>
+        <a href="mailto:hello@yourdomain.com">Email</a>
+      </div>
+    </footer>
   </main>
+
+  <script src="./assets/script.js"></script>
 </body>
 </html>
