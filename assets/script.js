@@ -1,81 +1,72 @@
-let scene, camera, renderer, core, shell;
-let currentLang = 'en';
+let scene, camera, renderer, bioCell, outerShell;
 
 function init() {
+    // 1. Scene Setup
     scene = new THREE.Scene();
     camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
     
-    renderer = new THREE.WebGLRenderer({ 
-        canvas: document.getElementById('bio-canvas'), 
-        antialias: true, 
-        alpha: true 
-    });
+    // 2. Renderer Setup
+    renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
     renderer.setSize(window.innerWidth, window.innerHeight);
+    renderer.setPixelRatio(window.devicePixelRatio);
+    
+    // Injecting the canvas into our specific container
+    const container = document.getElementById('canvas-container');
+    if (container) {
+        container.appendChild(renderer.domElement);
+    }
 
-    // Geometry 1: The Inner "Nucleus"
-    const coreGeom = new THREE.IcosahedronGeometry(1.5, 1);
+    // 3. Create Inner Core (The Bio-Pulse)
+    const coreGeo = new THREE.IcosahedronGeometry(1.6, 2);
     const coreMat = new THREE.MeshBasicMaterial({ 
         color: 0xffffff, 
         wireframe: true, 
         transparent: true, 
-        opacity: 0.2 
+        opacity: 0.12 
     });
-    core = new THREE.Mesh(coreGeom, coreMat);
-    scene.add(core);
+    bioCell = new THREE.Mesh(coreGeo, coreMat);
+    scene.add(bioCell);
 
-    // Geometry 2: The "Biological Shield"
-    const shellGeom = new THREE.SphereGeometry(2.5, 32, 32);
+    // 4. Create Outer Shell (The Data-Field)
+    const shellGeo = new THREE.SphereGeometry(2.8, 32, 32);
     const shellMat = new THREE.MeshBasicMaterial({ 
         color: 0x00FF41, 
         wireframe: true, 
         transparent: true, 
-        opacity: 0.15 
+        opacity: 0.08 
     });
-    shell = new THREE.Mesh(shellGeom, shellMat);
-    scene.add(shell);
+    outerShell = new THREE.Mesh(shellGeo, shellMat);
+    scene.add(outerShell);
 
     camera.position.z = 6;
-
     animate();
 }
 
 function animate() {
     requestAnimationFrame(animate);
 
-    const time = Date.now() * 0.001;
+    // Calculate time-based pulse (Approx 60-70 BPM)
+    const time = Date.now() * 0.0015;
+    const pulse = 1 + Math.sin(time * 2) * 0.1; 
     
-    // Simulating a 60 BPM pulse
-    const pulse = 1 + Math.sin(time * 2) * 0.05;
-    
-    core.scale.set(pulse, pulse, pulse);
-    shell.scale.set(1/pulse, 1/pulse, 1/pulse);
-    
-    core.rotation.y += 0.005;
-    shell.rotation.y -= 0.002;
-    shell.rotation.z += 0.002;
+    // Animate Inner Core
+    bioCell.scale.set(pulse, pulse, pulse);
+    bioCell.rotation.y += 0.004;
+
+    // Animate Outer Shell in opposite direction
+    outerShell.scale.set(1.1/pulse, 1.1/pulse, 1.1/pulse);
+    outerShell.rotation.y -= 0.002;
+    outerShell.rotation.z += 0.003;
 
     renderer.render(scene, camera);
 }
 
-// Language Toggle Logic
-document.getElementById('lang-toggle').addEventListener('click', () => {
-    currentLang = currentLang === 'en' ? 'fr' : 'en';
-    document.querySelectorAll('.lang-en').forEach(el => el.style.display = currentLang === 'en' ? 'block' : 'none');
-    document.querySelectorAll('.lang-fr').forEach(el => el.style.display = currentLang === 'fr' ? 'block' : 'none');
-});
-
-// Window Resize
+// Ensure the site stays responsive on mobile/desktop resize
 window.addEventListener('resize', () => {
     camera.aspect = window.innerWidth / window.innerHeight;
     camera.updateProjectionMatrix();
     renderer.setSize(window.innerWidth, window.innerHeight);
 });
 
-// Initializing with a slight delay for the "loader" effect
-window.onload = () => {
-    setTimeout(() => {
-        document.body.classList.remove('loading');
-        document.getElementById('loader').style.opacity = '0';
-        init();
-    }, 1000);
-};
+// Start the engine
+init();
