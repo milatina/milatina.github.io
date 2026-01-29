@@ -134,3 +134,17 @@ body {
     font-size: 15vw; /* Make it massive on mobile */
   }
 }
+
+.cursor-sigil {
+  width: 80px;
+  height: 80px;
+  background: url('../img/sigil_gold_icon.png') no-repeat center;
+  background-size: contain;
+  position: fixed;
+  top: 0; left: 0;
+  pointer-events: none;
+  z-index: 9999;
+  opacity: 0.4;
+  mix-blend-mode: screen;
+  transition: transform 0.1s ease-out; /* Slight delay for a "ghost" feel */
+}
