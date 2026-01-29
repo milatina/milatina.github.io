@@ -1,136 +1,103 @@
 :root {
+  --gold: #d4af37;
   --bg-void: #020202;
-  --gold-leaf: #d4af37;
-  --blood-wine: #880808;
   --bone: #C9C1C1;
-  --glass: rgba(255, 255, 255, 0.03);
+  --blood: #880808;
 }
 
-* { box-sizing: border-box; margin: 0; padding: 0; }
+* { margin: 0; padding: 0; box-sizing: border-box; cursor: crosshair; }
 
 body {
-  background-color: var(--bg-void);
+  background: var(--bg-void);
   color: var(--bone);
   font-family: 'Inter', sans-serif;
-  overflow-x: hidden;
+  overflow: hidden; /* Disables standard vertical scroll */
 }
 
-/* Texture overlay */
-.grain {
+/* Fixed Video Setup */
+.video-background {
   position: fixed;
-  top: 0; left: 0; width: 100%; height: 100%;
-  background: url('https://upload.wikimedia.org/wikipedia/commons/7/76/1k_filmgrain.png');
-  opacity: 0.05; pointer-events: none; z-index: 100;
+  top: 0; left: 0; width: 100vw; height: 100vh;
+  z-index: -1;
 }
 
-/* Nav Styles */
-.nav {
-  display: flex; justify-content: space-between;
-  padding: 40px 6%; position: fixed; width: 100%; z-index: 1000;
-}
-
-.brand {
-  text-decoration: none; color: var(--gold-leaf);
-  font-weight: 600; letter-spacing: 4px; font-size: 1.1rem;
-}
-
-.links a {
-  text-decoration: none; color: var(--bone);
-  margin-left: 30px; font-size: 0.8rem; text-transform: uppercase;
-  letter-spacing: 2px; transition: 0.3s;
-}
-
-.links a:hover { color: var(--gold-leaf); }
-
-/* Hero Section */
-.hero {
-  height: 100vh; display: flex; align-items: center;
-  padding: 0 6%; position: relative;
-}
-
-.title {
-  font-size: clamp(3rem, 8vw, 6rem); line-height: 0.9;
-  font-weight: 300; margin-bottom: 2rem; color: white;
-}
-
-.italic-glow {
-  font-family: 'Playfair Display', serif; font-style: italic;
-  color: var(--gold-leaf); text-shadow: 0 0 20px rgba(212, 175, 55, 0.3);
-}
-
-.kicker {
-  color: var(--blood-wine); text-transform: uppercase;
-  letter-spacing: 5px; font-size: 0.7rem; margin-bottom: 1rem;
-}
-
-.sub { max-width: 450px; font-weight: 300; color: #888; }
-
-/* The Sigil Watermark */
-.sigil-watermark {
-  position: absolute; left: 10%; top: 50%; transform: translateY(-50%);
-  width: 500px; height: 500px;
-  background: url('../img/sigil_gold.png') no-repeat center;
-  background-size: contain; opacity: 0.07; filter: blur(2px);
-  z-index: -1; animation: breath 10s infinite ease-in-out;
-}
-
-@keyframes breath {
-  0%, 100% { transform: translateY(-50%) scale(1); opacity: 0.05; }
-  50% { transform: translateY(-50%) scale(1.05); opacity: 0.1; }
-}
-
-/* Video Background */
-.hero_media {
-  position: absolute; top: 0; right: 0; width: 55%; height: 100%; z-index: -2;
-}
-
-.cloudinary-video {
+.video-background video {
   width: 100%; height: 100%; object-fit: cover;
-  filter: contrast(110%) brightness(0.6) grayscale(30%);
+  filter: contrast(130%) brightness(0.4) grayscale(20%);
 }
 
-.vignette {
+.overlay-texture {
   position: absolute; top: 0; left: 0; width: 100%; height: 100%;
-  background: linear-gradient(to right, var(--bg-void) 10%, transparent 80%);
+  background: radial-gradient(circle, transparent 20%, var(--bg-void) 100%);
 }
 
-/* Buttons */
-.btn.primary {
-  display: inline-block; padding: 18px 45px;
-  border: 1px solid var(--gold-leaf); color: var(--gold-leaf);
-  text-decoration: none; text-transform: uppercase;
-  letter-spacing: 3px; font-size: 0.7rem; transition: 0.5s;
+/* Horizontal Logic */
+.horizontal-scroll-wrapper {
+  width: 100vh;
+  height: 100vw;
+  transform: rotate(-90deg) translateX(-100vh);
+  transform-origin: top left;
+  overflow-y: scroll;
+  overflow-x: hidden;
+  scrollbar-width: none; /* Hide scrollbar */
 }
 
-.btn.primary:hover {
-  background: var(--gold-leaf); color: black;
-  box-shadow: 0 0 30px rgba(212, 175, 55, 0.3);
+.horizontal-content {
+  display: flex;
+  flex-direction: row;
+  width: 500vw; /* Length of the "art gallery" */
+  transform: rotate(90deg) translateY(-100vh);
+  transform-origin: top left;
 }
 
-/* Archive Cards */
-.section { padding: 120px 6%; }
-.label {
-  color: var(--blood-wine); font-size: 0.65rem; text-transform: uppercase;
-  letter-spacing: 6px; margin-bottom: 60px; border-bottom: 1px solid #1a1a1a;
-  padding-bottom: 15px;
+.panel {
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 10vw;
 }
 
-.grid { display: grid; grid-template-columns: 1fr 1fr; gap: 30px; }
-
-.card {
-  background: var(--glass); padding: 60px; border: 1px solid #111;
-  backdrop-filter: blur(10px); position: relative; transition: 0.5s;
+/* Typography Art */
+.hero-text {
+  font-size: 10vw;
+  text-transform: uppercase;
+  font-weight: 200;
+  line-height: 0.8;
 }
 
-.card:hover { border-color: var(--gold-leaf); transform: translateY(-10px); }
-
-.card-accent {
-  position: absolute; top: 0; left: 0; width: 3px; height: 100%;
-  background: var(--blood-wine);
+.glow-serif {
+  font-family: 'Playfair Display', serif;
+  font-style: italic;
+  color: var(--gold);
+  text-shadow: 0 0 40px rgba(212, 175, 55, 0.4);
 }
 
-.card h3 { font-family: 'Playfair Display', serif; font-size: 1.8rem; margin-bottom: 15px; }
-.card p { color: #888; font-size: 0.95rem; }
-.card-year { font-size: 0.7rem; color: var(--gold-leaf); letter-spacing: 2px; }
+/* Glassmorphism Cards */
+.glass-card {
+  background: rgba(255, 255, 255, 0.02);
+  backdrop-filter: blur(15px);
+  border: 1px solid rgba(212, 175, 55, 0.1);
+  padding: 60px;
+  width: 40vw;
+  transition: 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+}
 
-.footer { padding: 60px 6%; border-top: 1px solid #111; font-size: 0.6rem; color: #444; letter-spacing: 3px; }
+.glass-card:hover {
+  background: rgba(212, 175, 55, 0.05);
+  border-color: var(--gold);
+  transform: scale(1.02);
+}
+
+/* Art Nav */
+.art-nav {
+  position: fixed;
+  top: 40px; left: 40px; right: 40px;
+  display: flex; justify-content: space-between;
+  z-index: 100;
+  font-size: 0.6rem;
+  letter-spacing: 4px;
+}
+
+.brand { color: var(--gold); font-weight: 600; }
