@@ -5,213 +5,41 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>MILA TINA | BioSymbiosis</title>
     
+    <link rel="preconnect" href="https://fonts.googleapis.com">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@200;400&family=JetBrains+Mono:wght@200&display=swap" rel="stylesheet">
-
-    <style>
-        /* 1. THE VIBE (CSS) */
-        :root {
-            --bio-green: #00FF41;
-            --pure-black: #050505;
-            --dim-grey: #666;
-        }
-
-        body, html {
-            margin: 0;
-            padding: 0;
-            background-color: var(--pure-black);
-            color: #ffffff;
-            font-family: 'Inter', sans-serif;
-            overflow-x: hidden;
-            height: 100%;
-        }
-
-        /* Nav & Brand */
-        nav {
-            position: fixed;
-            top: 0;
-            width: 100%;
-            display: flex;
-            justify-content: space-between;
-            padding: 40px;
-            box-sizing: border-box;
-            z-index: 100;
-            letter-spacing: 4px;
-            font-size: 12px;
-            font-weight: 200;
-        }
-
-        /* Terminal-style Metadata */
-        #metadata {
-            position: absolute;
-            top: 120px;
-            left: 40px;
-            font-family: 'JetBrains Mono', monospace;
-            font-size: 10px;
-            line-height: 1.8;
-            color: var(--dim-grey);
-            z-index: 10;
-        }
-
-        .highlight { color: var(--bio-green); text-shadow: 0 0 8px var(--bio-green); }
-
-        /* Hero Content */
-        #hero {
-            height: 100vh;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            text-align: center;
-            position: relative;
-        }
-
-        .hero-title {
-            z-index: 5;
-            pointer-events: none;
-        }
-
-        h1 {
-            font-size: clamp(3rem, 10vw, 7rem);
-            font-weight: 200;
-            text-transform: uppercase;
-            letter-spacing: -2px;
-            margin: 0;
-        }
-
-        .subtitle {
-            font-family: 'JetBrains Mono', monospace;
-            font-size: 12px;
-            letter-spacing: 2px;
-            color: var(--dim-grey);
-            margin-top: 20px;
-        }
-
-        /* 3D Canvas Container */
-        #canvas-container {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            z-index: 1;
-        }
-
-        section#about {
-            padding: 150px 40px;
-            max-width: 800px;
-            margin: 0 auto;
-            z-index: 10;
-            position: relative;
-        }
-
-        .statement {
-            font-size: 24px;
-            font-weight: 200;
-            line-height: 1.5;
-            color: #ccc;
-        }
-    </style>
+    
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
     <nav>
-        <div>MILA TINA</div>
-        <div style="opacity: 0.5;">EN / FR</div>
+        <div class="logo">MILA TINA</div>
+        <div class="lang-nav">EN / FR</div>
     </nav>
 
-    <div id="metadata">
-        // IDENTITY: <span style="color:white">MILA TINA</span><br>
-        // ROLE: <span style="color:white">INTERDISCIPLINARY ARTIST</span><br>
-        // PROJECT: <span class="highlight">BIOSYMBIOSIS</span><br>
-        // LOC_REF: <span style="color:white">GLOBAL_PERFORMANCE_ARCHIVE</span>
+    <div id="metadata-layer">
+        // IDENTITY: <span class="white">MILA TINA</span><br>
+        // ROLE: <span class="white">INTERDISCIPLINARY ARTIST</span><br>
+        // PROJECT: <span class="bio-green">BIOSYMBIOSIS</span><br>
+        // STATUS: <span class="bio-green">STREAMING_LIVE_DATA</span>
     </div>
 
-    <section id="hero">
-        <div class="hero-title">
+    <section id="hero-section">
+        <div class="hero-text">
             <h1>BioSymbiosis</h1>
-            <p class="subtitle">BIOLOGICAL DATA TRANSMUTATION & EXPERIENCE DESIGN</p>
+            <p class="tagline">A VISCERAL DIALOGUE BETWEEN BIOLOGICAL SYSTEMS AND DIGITAL ARCHITECTURE</p>
         </div>
         <div id="canvas-container"></div>
     </section>
 
-    <section id="about">
-        <p class="statement">
-            Mila Tina creates at the intersection of biology and architecture. 
-            By capturing real-time heart rate data, she translates the visceral 
-            rhythms of the human body into immersive digital landscapes.
+    <section id="about-section">
+        <p class="manifesto">
+            Exploring the invisible threads of human connection through real-time bio-data transmutation. 
+            Mila Tina translates heart rhythms into architectural symphonies.
         </p>
     </section>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
-
-    <script>
-        /* 2. THE LOGIC (JS) */
-        let scene, camera, renderer, bioCell, outerShell;
-
-        function init() {
-            // Setup
-            scene = new THREE.Scene();
-            camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
-            
-            renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
-            renderer.setSize(window.innerWidth, window.innerHeight);
-            renderer.setPixelRatio(window.devicePixelRatio);
-            document.getElementById('canvas-container').appendChild(renderer.domElement);
-
-            // Create Inner Core (The "Heart")
-            const coreGeo = new THREE.IcosahedronGeometry(1.8, 2);
-            const coreMat = new THREE.MeshBasicMaterial({ 
-                color: 0xffffff, 
-                wireframe: true, 
-                transparent: true, 
-                opacity: 0.1 
-            });
-            bioCell = new THREE.Mesh(coreGeo, coreMat);
-            scene.add(bioCell);
-
-            // Create Outer Shield (The "Data")
-            const shellGeo = new THREE.SphereGeometry(3, 32, 32);
-            const shellMat = new THREE.MeshBasicMaterial({ 
-                color: 0x00FF41, 
-                wireframe: true, 
-                transparent: true, 
-                opacity: 0.1 
-            });
-            outerShell = new THREE.Mesh(shellGeo, shellMat);
-            scene.add(outerShell);
-
-            camera.position.z = 6;
-            render();
-        }
-
-        function render() {
-            requestAnimationFrame(render);
-
-            const time = Date.now() * 0.001;
-            
-            // Simulation of a 60BPM Pulse
-            const pulse = 1 + Math.sin(time * 2.5) * 0.1; 
-            
-            bioCell.scale.set(pulse, pulse, pulse);
-            bioCell.rotation.y += 0.005;
-
-            outerShell.scale.set(1.1/pulse, 1.1/pulse, 1.1/pulse);
-            outerShell.rotation.z -= 0.002;
-            outerShell.rotation.x += 0.002;
-
-            renderer.render(scene, camera);
-        }
-
-        // Handle Window Resize
-        window.addEventListener('resize', onWindowResize, false);
-        function onWindowResize() {
-            camera.aspect = window.innerWidth / window.innerHeight;
-            camera.updateProjectionMatrix();
-            renderer.setSize(window.innerWidth, window.innerHeight);
-        }
-
-        // Run Init
-        init();
-    </script>
+    <script src="script.js"></script>
 </body>
 </html>
