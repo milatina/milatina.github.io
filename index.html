@@ -4,49 +4,114 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>MILA TINA | BioSymbiosis</title>
-    <link rel="stylesheet" href="style.css">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400&family=JetBrains+Mono:wght@200;400&display=swap" rel="stylesheet">
-</head>
-<body class="loading">
+    <style>
+        :root { --bio-green: #00FF41; --pure-black: #050505; }
+        body, html { margin: 0; padding: 0; background: var(--pure-black); color: #fff; font-family: 'Inter', sans-serif; overflow-x: hidden; }
+        
+        /* High-End Header */
+        nav { display: flex; justify-content: space-between; padding: 30px 40px; position: fixed; width: 100%; z-index: 100; box-sizing: border-box; }
+        .logo { font-weight: 300; letter-spacing: 5px; font-size: 1.2rem; }
+        .nav-links { display: flex; align-items: center; }
+        .nav-links a { color: #fff; text-decoration: none; margin-left: 30px; font-size: 11px; letter-spacing: 2px; opacity: 0.7; }
 
-    <div id="loader"><span>INITIALIZING_SYSTEM...</span></div>
+        /* Meta Data Overlay */
+        #meta-display { position: absolute; top: 120px; left: 40px; font-family: 'JetBrains Mono', monospace; font-size: 10px; letter-spacing: 1px; color: #666; z-index: 5; line-height: 2; }
+        .bio-green { color: var(--bio-green); text-shadow: 0 0 10px var(--bio-green); }
+
+        /* Hero */
+        #hero { height: 100vh; display: flex; align-items: center; justify-content: center; position: relative; }
+        .hero-content { z-index: 10; text-align: center; pointer-events: none; }
+        h1 { font-size: clamp(2rem, 8vw, 6rem); font-weight: 200; text-transform: uppercase; letter-spacing: -2px; margin: 0; }
+        .tagline { font-family: 'JetBrains Mono', monospace; font-size: 12px; color: #888; margin-top: 10px; }
+
+        canvas { position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: 1; }
+        
+        #statement { padding: 150px 10%; position: relative; z-index: 10; background: var(--pure-black); }
+        .big-text { font-size: 1.8rem; font-weight: 200; color: #ccc; max-width: 900px; line-height: 1.4; }
+    </style>
+</head>
+<body>
 
     <nav>
         <div class="logo">MILA TINA</div>
         <div class="nav-links">
-            <a href="#archive">ARCHIVE</a>
-            <a href="#logic">BIO-LOGIC</a>
-            <button id="lang-toggle">FR / EN</button>
+            <a href="#">ARCHIVE</a>
+            <a href="#">BIO-LOGIC</a>
+            <a href="#" style="border: 1px solid #444; padding: 5px 10px;">EN / FR</a>
         </div>
     </nav>
 
+    <div id="meta-display">
+        // IDENTITY: MILA TINA<br>
+        // ROLE: INTERDISCIPLINARY ARTIST | EXPERIENCE DESIGNER<br>
+        // STATUS: <span class="bio-green">ACTIVE_STREAMING_BPM</span>
+    </div>
+
     <section id="hero">
-        <div id="meta-display">
-            <p>// IDENTITY: <span class="white">MILA TINA</span></p>
-            <p>// ROLE: <span class="white">INTERDISCIPLINARY ARTIST | EXPERIENCE DESIGNER</span></p>
-            <p>// STATUS: <span class="bio-green">ACTIVE_STREAMING_BPM</span></p>
-        </div>
-
         <div class="hero-content">
-            <h1 class="lang-en">BioSymbiosis</h1>
-            <h1 class="lang-fr" style="display:none;">BioSymbiose</h1>
-            <p class="tagline lang-en">A visceral dialogue between biological systems and digital architecture.</p>
-            <p class="tagline lang-fr" style="display:none;">Un dialogue viscéral entre les systèmes biologiques et l'architecture numérique.</p>
+            <h1>BioSymbiosis</h1>
+            <p class="tagline">A VISCERAL DIALOGUE BETWEEN BIOLOGICAL SYSTEMS AND DIGITAL ARCHITECTURE.</p>
         </div>
-
-        <canvas id="bio-canvas"></canvas>
+        <div id="canvas-container"></div>
     </section>
 
     <section id="statement">
-        <div class="container">
-            <h2 class="lang-en">The Vision</h2>
-            <h2 class="lang-fr" style="display:none;">La Vision</h2>
-            <p class="big-text lang-en">Mila Tina explores the invisible threads of human connection. Through real-time bio-data transmutation, she creates immersive installations that turn heartbeats into architectural symphonies.</p>
-            <p class="big-text lang-fr" style="display:none;">Mila Tina explore les fils invisibles de la connexion humaine. À travers la transmutation de bio-données en temps réel, elle crée des installations immersives qui transforment les battements de cœur en symphonies architecturales.</p>
+        <div class="big-text">
+            Mila Tina explores the invisible threads of human connection. Through real-time bio-data transmutation, she creates immersive installations that turn heartbeats into architectural symphonies.
         </div>
     </section>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
-    <script src="script.js"></script>
+    
+    <script>
+        let scene, camera, renderer, core, shell;
+
+        function init() {
+            scene = new THREE.Scene();
+            camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
+            
+            renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
+            renderer.setSize(window.innerWidth, window.innerHeight);
+            document.getElementById('canvas-container').appendChild(renderer.domElement);
+
+            // Core - The Soul
+            const coreGeom = new THREE.IcosahedronGeometry(1.5, 2);
+            const coreMat = new THREE.MeshBasicMaterial({ color: 0xffffff, wireframe: true, transparent: true, opacity: 0.1 });
+            core = new THREE.Mesh(coreGeom, coreMat);
+            scene.add(core);
+
+            // Shell - The Bio-Data
+            const shellGeom = new THREE.SphereGeometry(2.8, 32, 32);
+            const shellMat = new THREE.MeshBasicMaterial({ color: 0x00FF41, wireframe: true, transparent: true, opacity: 0.15 });
+            shell = new THREE.Mesh(shellGeom, shellMat);
+            scene.add(shell);
+
+            camera.position.z = 6;
+            animate();
+        }
+
+        function animate() {
+            requestAnimationFrame(animate);
+            const time = Date.now() * 0.001;
+            const pulse = 1 + Math.sin(time * 2) * 0.08; // 60 BPM approx
+            
+            core.scale.set(pulse, pulse, pulse);
+            shell.scale.set(1/pulse, 1/pulse, 1/pulse);
+            
+            core.rotation.y += 0.003;
+            shell.rotation.y -= 0.001;
+            
+            renderer.render(scene, camera);
+        }
+
+        window.addEventListener('resize', () => {
+            camera.aspect = window.innerWidth / window.innerHeight;
+            camera.updateProjectionMatrix();
+            renderer.setSize(window.innerWidth, window.innerHeight);
+        });
+
+        init();
+    </script>
 </body>
 </html>
