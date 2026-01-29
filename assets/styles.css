@@ -1,179 +1,107 @@
 :root {
-  --bg-black: #050505;
-  --accent-red: #ff0000; /* Sharp Alchemy Red */
-  --text-white: #ffffff;
-  --text-gray: #888888;
-  --card-bg: #0f0f0f;
+  --bg-void: #050505;
+  --blood-red: #880808;
+  --wine-deep: #430404;
+  --bone: #C9C1C1; /* Steampunk/Bone color for text */
+  --shadow-line: rgba(136, 8, 8, 0.2);
 }
 
 body {
-  background-color: var(--bg-black);
-  color: var(--text-white);
+  background-color: var(--bg-void);
+  color: var(--bone);
   font-family: 'Inter', sans-serif;
   margin: 0;
-  overflow-x: hidden;
 }
 
-/* Film Grain Effect */
-.grain {
-  position: fixed;
-  top: 0; left: 0;
-  width: 100%; height: 100%;
-  background: url('https://upload.wikimedia.org/wikipedia/commons/7/76/1k_filmgrain.png');
-  opacity: 0.04;
-  pointer-events: none;
-  z-index: 999;
+/* Alchemy Italic Glow */
+.italic-glow {
+  font-family: 'Playfair Display', serif;
+  font-style: italic;
+  color: var(--blood-red);
+  text-shadow: 0 0 15px rgba(136, 8, 8, 0.4);
 }
 
-.nav {
-  display: flex;
-  justify-content: space-between;
-  padding: 30px 5%;
-  position: fixed;
-  width: 100%;
-  z-index: 100;
-  background: linear-gradient(to bottom, var(--bg-black), transparent);
+.kicker {
+  color: var(--blood-red);
+  text-transform: uppercase;
+  letter-spacing: 4px;
+  font-size: 0.7rem;
+  font-weight: 600;
 }
 
 .brand {
   font-weight: 600;
-  font-size: 1.2rem;
+  color: var(--bone);
   text-decoration: none;
-  color: white;
-  letter-spacing: 1px;
+  letter-spacing: 2px;
 }
 
-.dot { color: var(--accent-red); }
+.dot { color: var(--blood-red); }
 
-.links a {
-  margin-left: 25px;
-  text-decoration: none;
-  color: var(--text-gray);
-  font-size: 0.9rem;
-  transition: 0.3s;
-}
-
-.links a:hover { color: white; }
-
-.hero {
-  height: 100vh;
-  display: flex;
-  align-items: center;
-  padding: 0 5%;
-  position: relative;
-}
-
-.title {
-  font-size: clamp(2.5rem, 7vw, 5rem);
-  line-height: 0.9;
-  font-weight: 600;
-  margin: 20px 0;
-}
-
-.title_glow {
-  color: white;
-  text-shadow: 0 0 20px rgba(255, 255, 255, 0.4);
-}
-
-.kicker {
-  color: var(--accent-red);
-  text-transform: uppercase;
-  letter-spacing: 3px;
-  font-size: 0.75rem;
-  font-weight: 600;
-}
-
-.sub {
-  max-width: 500px;
-  color: var(--text-gray);
-  font-size: 1.1rem;
-}
-
+/* Cloudinary Video Styling - High Contrast */
 .hero_media {
   position: absolute;
   top: 0; right: 0;
-  width: 50%; height: 100%;
+  width: 55%; height: 100%;
   z-index: -1;
-  overflow: hidden;
+  border-left: 1px solid var(--shadow-line);
 }
 
 .cloudinary-video {
   width: 100%; height: 100%;
   object-fit: cover;
-  filter: grayscale(100%) contrast(120%);
+  filter: contrast(120%) brightness(0.7) saturate(0.8);
 }
 
-/* The Alchemy Red Accent Stripe */
-.hero::after {
-  content: '';
+/* This blends the video into the black background */
+.vignette {
   position: absolute;
-  bottom: 10%; left: 0;
-  width: 100px; height: 2px;
-  background: var(--accent-red);
-}
-
-.btn {
-  display: inline-block;
-  padding: 15px 35px;
-  text-decoration: none;
-  font-weight: 600;
-  font-size: 0.8rem;
-  margin-right: 15px;
-  margin-top: 30px;
-  transition: 0.3s;
+  top: 0; left: 0;
+  width: 100%; height: 100%;
+  background: linear-gradient(to right, var(--bg-void) 5%, transparent 60%);
 }
 
 .btn.primary {
-  background: white;
-  color: black;
-}
-
-.btn.outline {
-  border: 1px solid rgba(255,255,255,0.2);
+  background: var(--blood-red);
   color: white;
-}
-
-.btn:hover {
-  background: var(--accent-red);
-  color: white;
-  border-color: var(--accent-red);
-}
-
-.section { padding: 100px 5%; }
-
-.label {
+  padding: 18px 40px;
+  text-decoration: none;
+  font-size: 0.8rem;
+  letter-spacing: 2px;
   text-transform: uppercase;
-  letter-spacing: 5px;
-  font-size: 0.7rem;
-  color: var(--text-gray);
-  border-bottom: 1px solid #222;
-  padding-bottom: 15px;
-  margin-bottom: 50px;
+  display: inline-block;
+  border: 1px solid var(--blood-red);
+  transition: 0.4s;
 }
 
-.grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-  gap: 20px;
+.btn.primary:hover {
+  background: transparent;
+  box-shadow: 0 0 20px var(--shadow-line);
 }
 
+/* Archive Cards - Alchemy Style */
 .card {
-  background: var(--card-bg);
-  padding: 40px;
-  border: 1px solid #1a1a1a;
-  transition: 0.3s;
-}
-
-.card:hover {
-  border-color: var(--accent-red);
-  transform: translateY(-5px);
-}
-
-.card h3 { margin-bottom: 15px; }
-.card p { color: var(--text-gray); font-size: 0.95rem; }
-
-.form_shell {
   background: #0a0a0a;
   padding: 40px;
-  border-radius: 4px;
+  border: 1px solid #111;
+  position: relative;
+  overflow: hidden;
+}
+
+.card-line {
+  position: absolute;
+  top: 0; left: 0;
+  width: 2px; height: 100%;
+  background: var(--blood-red);
+  opacity: 0.5;
+}
+
+.label {
+  color: var(--blood-red);
+  font-size: 0.6rem;
+  text-transform: uppercase;
+  letter-spacing: 5px;
+  margin-bottom: 40px;
+  border-bottom: 1px solid #1a1a1a;
+  padding-bottom: 10px;
 }
