@@ -1,93 +1,102 @@
+/* Color Palette */
 :root {
     --bio-green: #00FF41;
-    --dim-grey: #444;
     --pure-black: #050505;
+    --dim-grey: #666;
 }
 
-* { margin: 0; padding: 0; box-sizing: border-box; }
-
-body {
-    background: var(--pure-black);
-    color: #fff;
+body, html {
+    margin: 0;
+    padding: 0;
+    background-color: var(--pure-black);
+    color: #ffffff;
     font-family: 'Inter', sans-serif;
-    line-height: 1.6;
     overflow-x: hidden;
 }
 
-/* Metadata Layer */
-#meta-display {
+/* Navigation */
+nav {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    padding: 40px;
+    z-index: 100;
+    box-sizing: border-box;
+    letter-spacing: 4px;
+    font-size: 11px;
+    text-transform: uppercase;
+}
+
+/* The Technical Metadata Overlay */
+#metadata-layer {
     position: absolute;
-    top: 100px;
+    top: 120px;
     left: 40px;
     font-family: 'JetBrains Mono', monospace;
-    font-size: 11px;
-    letter-spacing: 2px;
+    font-size: 10px;
+    line-height: 2;
     color: var(--dim-grey);
-    z-index: 5;
+    z-index: 10;
 }
 
 .white { color: #fff; }
 .bio-green { color: var(--bio-green); text-shadow: 0 0 10px var(--bio-green); }
 
-/* Navigation */
-nav {
-    display: flex;
-    justify-content: space-between;
-    padding: 30px 40px;
-    position: fixed;
-    width: 100%;
-    z-index: 100;
-    backdrop-filter: blur(10px);
-}
-
-.logo { font-weight: 300; letter-spacing: 5px; font-size: 1.2rem; }
-
-.nav-links a, #lang-toggle {
-    color: #fff;
-    text-decoration: none;
-    margin-left: 30px;
-    font-size: 12px;
-    letter-spacing: 2px;
-    background: none;
-    border: 1px solid rgba(255,255,255,0.2);
-    padding: 5px 15px;
-    cursor: pointer;
-}
-
-/* Hero Section */
-#hero {
+/* Hero Section Styling */
+#hero-section {
     height: 100vh;
     display: flex;
-    align-items: center;
     justify-content: center;
-    text-align: center;
+    align-items: center;
+    position: relative;
 }
 
-.hero-content { z-index: 2; pointer-events: none; }
+.hero-text {
+    z-index: 5;
+    text-align: center;
+    pointer-events: none; /* Allows mouse to interact with 3D behind text */
+}
 
 h1 {
-    font-size: clamp(3rem, 10vw, 8rem);
+    font-size: clamp(2.5rem, 10vw, 6.5rem);
     font-weight: 200;
     text-transform: uppercase;
     letter-spacing: -2px;
-    margin-bottom: 20px;
+    margin: 0;
 }
 
 .tagline {
     font-family: 'JetBrains Mono', monospace;
-    font-size: 14px;
+    font-size: 11px;
+    letter-spacing: 3px;
     color: var(--dim-grey);
-    max-width: 600px;
-    margin: 0 auto;
+    margin-top: 20px;
 }
 
-#bio-canvas {
+/* 3D Canvas Container */
+#canvas-container {
     position: absolute;
     top: 0;
     left: 0;
+    width: 100%;
+    height: 100%;
     z-index: 1;
 }
 
-/* Sections */
-#statement { padding: 200px 10%; background: #000; }
-.big-text { font-size: 2rem; font-weight: 200; color: #ccc; }
+/* About/Manifesto */
+#about-section {
+    padding: 150px 10%;
+    background: var(--pure-black);
+    position: relative;
+    z-index: 10;
+}
+
+.manifesto {
+    font-size: 1.8rem;
+    font-weight: 200;
+    line-height: 1.4;
+    color: #bbb;
+    max-width: 900px;
+}
