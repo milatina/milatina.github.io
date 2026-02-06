@@ -10,28 +10,20 @@ function init() {
     renderer.setPixelRatio(window.devicePixelRatio);
     
     const container = document.getElementById('canvas-container');
-    if (container) {
-        container.appendChild(renderer.domElement);
-    }
+    if (container) { container.appendChild(renderer.domElement); }
 
-    // NUCLEUS (Gold/Alchemy)
+    // THE NUCLEUS (Gold/Feminine)
     const coreGeo = new THREE.IcosahedronGeometry(1.5, 2);
     const coreMat = new THREE.MeshBasicMaterial({ 
-        color: 0xbda06d, 
-        wireframe: true, 
-        transparent: true, 
-        opacity: 0.4 
+        color: 0xbda06d, wireframe: true, transparent: true, opacity: 0.4 
     });
     bioCell = new THREE.Mesh(coreGeo, coreMat);
     scene.add(bioCell);
 
-    // SHELL (Navy/Structure)
+    // THE SHELL (Navy/Masculine)
     const shellGeo = new THREE.SphereGeometry(2.8, 32, 32);
     const shellMat = new THREE.MeshBasicMaterial({ 
-        color: 0x0a192f, 
-        wireframe: true, 
-        transparent: true, 
-        opacity: 0.15 
+        color: 0x0a192f, wireframe: true, transparent: true, opacity: 0.15 
     });
     outerShell = new THREE.Mesh(shellGeo, shellMat);
     scene.add(outerShell);
@@ -46,9 +38,8 @@ function animate() {
     const pulse = 1 + Math.sin(time * 2) * 0.08; 
     
     bioCell.scale.set(pulse, pulse, pulse);
-    bioCell.rotation.y += 0.005 + (mouseX * 0.00005);
-    bioCell.rotation.x += (mouseY * 0.00005);
-
+    bioCell.rotation.y += 0.004 + (mouseX * 0.00005);
+    
     outerShell.scale.set(1.1/pulse, 1.1/pulse, 1.1/pulse);
     outerShell.rotation.y -= 0.002;
 
@@ -63,16 +54,10 @@ window.addEventListener('mousemove', (e) => {
 
 window.addEventListener('scroll', () => {
     const scroll = window.pageYOffset;
-    const botLayer = document.getElementById('botanical-overlay');
+    const botLayer = document.getElementById('botanical-layer');
     if(botLayer) {
         botLayer.style.transform = `translateY(${scroll * 0.4}px)`;
     }
-});
-
-window.addEventListener('resize', () => {
-    camera.aspect = window.innerWidth / window.innerHeight;
-    camera.updateProjectionMatrix();
-    renderer.setSize(window.innerWidth, window.innerHeight);
 });
 
 init();
