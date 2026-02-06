@@ -1,26 +1,60 @@
-<div class="parallax-bg" id="botanical-layer"></div>
-<div class="parallax-bg" id="grain-overlay"></div>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MILA TINA | Bio-Alchemist</title>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@200;400&family=JetBrains+Mono:wght@200&display=swap" rel="stylesheet">
+    
+    <link rel="stylesheet" href="assets/styles.css">
+    
+    <style>
+        /* Prevents the white flash during loading */
+        body { background-color: #fcfcf9; }
+    </style>
+</head>
+<body>
 
-<nav>
-    <div class="logo">MILA TINA</div>
-    <div class="nav-right">
-        <a href="#works">WORKS</a>
-        <a href="#about">ABOUT</a>
-        <a href="#journal">JOURNAL</a>
-        <a href="#contact">CONTACT</a>
+    <div id="botanical-overlay"></div>
+    <div id="grain-texture"></div>
+
+    <nav>
+        <div class="logo">MILA TINA</div>
+        <div class="nav-right">
+            <a href="#works">WORKS</a>
+            <a href="#about">ABOUT</a>
+            <a href="#contact">CONTACT</a>
+        </div>
+    </nav>
+
+    <div id="meta-data">
+        <span class="gold">// NEOMYTH: BIOLOGICAL_SYNC</span><br>
+        // PHASE: <span class="navy">EVOLUTION_01</span><br>
+        // STATUS: <span class="bio-green">SYMBOSIS_ACTIVE</span>
     </div>
-</nav>
 
-<div id="meta-data">
-    <span class="gold">// NEOMYTH: BIOLOGICAL_SYNC</span><br>
-    // PHASE: <span class="navy">EVOLUTION_01</span><br>
-    // STATUS: <span class="bio-green">SYMBOSIS_ACTIVE</span>
-</div>
+    <section id="hero-portal">
+        <div class="hero-center">
+            <h1 class="navy">Symbiotic Pulse</h1>
+            <p class="role-tag gold">ARTIST & ALCHEMIST</p>
+        </div>
+        <div id="canvas-container"></div>
+    </section>
 
-<section id="hero-portal">
-    <div class="hero-center">
-        <h1 class="navy">Symbiotic Pulse</h1>
-        <p class="role-tag gold">ARTIST & ALCHEMIST</p>
-    </div>
-    <div id="canvas-container"></div>
-</section>
+    <section id="mission-statement">
+        <div class="content-wrap">
+            <h2 class="section-label gold">// THE ALCHEMICAL VISION</h2>
+            <p class="large-body navy">
+                Mila Tina weaves a tapestry of biological rhythms and technology, 
+                transmuting the hidden language of the body into 
+                an immersive sanctuary for the digital age.
+            </p>
+        </div>
+    </section>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <script src="assets/script.js"></script>
+</body>
+</html>
