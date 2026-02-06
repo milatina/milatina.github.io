@@ -1,72 +1,44 @@
 let scene, camera, renderer, bioCell, outerShell;
+let mouseX = 0, mouseY = 0;
+let targetX = 0, targetY = 0;
 
-function init() {
-    // 1. Scene Setup
-    scene = new THREE.Scene();
-    camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
-    
-    // 2. Renderer Setup
-    renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
-    renderer.setSize(window.innerWidth, window.innerHeight);
-    renderer.setPixelRatio(window.devicePixelRatio);
-    
-    // Injecting the canvas into our specific container
-    const container = document.getElementById('canvas-container');
-    if (container) {
-        container.appendChild(renderer.domElement);
-    }
-
-    // 3. Create Inner Core (The Bio-Pulse)
-    const coreGeo = new THREE.IcosahedronGeometry(1.6, 2);
-    const coreMat = new THREE.MeshBasicMaterial({ 
-        color: 0xffffff, 
-        wireframe: true, 
-        transparent: true, 
-        opacity: 0.12 
-    });
-    bioCell = new THREE.Mesh(coreGeo, coreMat);
-    scene.add(bioCell);
-
-    // 4. Create Outer Shell (The Data-Field)
-    const shellGeo = new THREE.SphereGeometry(2.8, 32, 32);
-    const shellMat = new THREE.MeshBasicMaterial({ 
-        color: 0x00FF41, 
-        wireframe: true, 
-        transparent: true, 
-        opacity: 0.08 
-    });
-    outerShell = new THREE.Mesh(shellGeo, shellMat);
-    scene.add(outerShell);
-
-    camera.position.z = 6;
-    animate();
-}
+// ... keep your init() function exactly as it is ...
 
 function animate() {
     requestAnimationFrame(animate);
 
-    // Calculate time-based pulse (Approx 60-70 BPM)
     const time = Date.now() * 0.0015;
+    
+    // 1. THE PULSE (The Biological Foundation)
     const pulse = 1 + Math.sin(time * 2) * 0.1; 
     
-    // Animate Inner Core
-    bioCell.scale.set(pulse, pulse, pulse);
-    bioCell.rotation.y += 0.004;
+    // 2. THE INTERVENTION (Mouse Reaction)
+    // This makes the cell subtly follow the user's presence
+    targetX = mouseX * 0.001;
+    targetY = mouseY * 0.001;
+    
+    bioCell.rotation.x += 0.05 * (targetY - bioCell.rotation.x);
+    bioCell.rotation.y += 0.05 * (targetX - bioCell.rotation.y);
 
-    // Animate Outer Shell in opposite direction
-    outerShell.scale.set(1.1/pulse, 1.1/pulse, 1.1/pulse);
+    // 3. ANIMATE LAYERS
+    bioCell.scale.set(pulse, pulse, pulse);
+    
+    // Outer Shell reacts to pulse in opposition (The "Breathing" effect)
+    const shellPulse = 1.1 / pulse;
+    outerShell.scale.set(shellPulse, shellPulse, shellPulse);
+    
     outerShell.rotation.y -= 0.002;
     outerShell.rotation.z += 0.003;
 
     renderer.render(scene, camera);
 }
 
-// Ensure the site stays responsive on mobile/desktop resize
-window.addEventListener('resize', () => {
-    camera.aspect = window.innerWidth / window.innerHeight;
-    camera.updateProjectionMatrix();
-    renderer.setSize(window.innerWidth, window.innerHeight);
+// 4. NEW: ADD THE "PRESENCE" TRACKER
+window.addEventListener('mousemove', (event) => {
+    // Centers the mouse coordinates
+    mouseX = (event.clientX - window.innerWidth / 2);
+    mouseY = (event.clientY - window.innerHeight / 2);
 });
 
-// Start the engine
+// ... keep your resize listener ...
 init();
