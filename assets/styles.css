@@ -1,21 +1,16 @@
-/* RESET */
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
 }
 
-/* THE FOUNDATION */
-body, html {
-    background-color: #050505 !important; /* Force OLED Black */
-    color: #ffffff !important;
+body {
+    background-color: #050505;
+    color: #ffffff;
     font-family: 'Inter', sans-serif;
-    width: 100%;
-    height: 100%;
     overflow-x: hidden;
 }
 
-/* NAVIGATION - Institutional Style */
 nav {
     position: fixed;
     top: 0;
@@ -23,48 +18,39 @@ nav {
     display: flex;
     justify-content: space-between;
     padding: 40px;
-    z-index: 1000; /* Ensure it's above the 3D */
-    letter-spacing: 2px;
+    z-index: 100;
 }
 
 .nav-right a {
     color: white;
     text-decoration: none;
     font-size: 11px;
+    letter-spacing: 2px;
     margin-left: 30px;
-    opacity: 0.7;
-    transition: 0.3s;
+    opacity: 0.6;
 }
 
-.nav-right a:hover {
-    opacity: 1;
-    color: #00FF41;
+#meta-data {
+    position: absolute;
+    top: 120px;
+    left: 40px;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    color: #555;
+    z-index: 10;
 }
 
-/* THE 3D CONTAINER - MUST BE ABSOLUTE */
-#canvas-container {
-    position: fixed; /* Fixed so it stays behind content */
-    top: 0;
-    left: 0;
-    width: 100vw;
-    height: 100vh;
-    z-index: 1; /* Lowest layer */
-    background: #050505;
-}
-
-/* HERO SECTION */
 #hero-portal {
-    position: relative;
     height: 100vh;
     width: 100%;
     display: flex;
     align-items: center;
     justify-content: center;
-    z-index: 10; /* Above the 3D */
-    pointer-events: none; /* Let mouse pass through to 3D */
+    position: relative;
 }
 
 .hero-center {
+    z-index: 20;
     text-align: center;
 }
 
@@ -73,40 +59,21 @@ h1 {
     font-weight: 200;
     text-transform: uppercase;
     letter-spacing: -2px;
-    line-height: 0.9;
 }
 
 .role-tag {
     font-family: 'JetBrains Mono', monospace;
     font-size: 11px;
-    letter-spacing: 4px;
     color: #00FF41;
-    margin-top: 20px;
+    letter-spacing: 3px;
+    margin-top: 15px;
 }
 
-/* METADATA OVERLAY */
-#meta-data {
+#canvas-container {
     position: absolute;
-    top: 120px;
-    left: 40px;
-    font-family: 'JetBrains Mono', monospace;
-    font-size: 10px;
-    color: #666;
-    line-height: 2;
-    z-index: 20;
-}
-
-/* MISSION SECTION */
-#mission-statement {
-    position: relative;
-    padding: 200px 10%;
-    background: #050505;
-    z-index: 30; /* Ensures this scrolls over the 3D */
-}
-
-.large-body {
-    font-size: 2.2rem;
-    font-weight: 200;
-    line-height: 1.3;
-    max-width: 900px;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 5;
 }
