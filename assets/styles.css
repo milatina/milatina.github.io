@@ -12,58 +12,54 @@ body, html {
     color: var(--navy);
     font-family: 'Inter', sans-serif;
     overflow-x: hidden;
-    height: 100%;
 }
 
-/* Botanical Parallax Layer */
-#botanical-overlay {
+/* Botanical Outlines - Organic/Future Vibe */
+#botanical-layer {
     position: fixed;
     top: 0;
     left: 0;
     width: 100%;
-    height: 150%; /* Taller for scroll room */
+    height: 120%;
+    /* Using a subtle leaf pattern to simulate the 'outlined flower' vibe */
     background-image: url('https://www.transparenttextures.com/patterns/leaf.png');
-    opacity: 0.08;
+    opacity: 0.07;
     z-index: 1;
     pointer-events: none;
+    filter: sepia(100%) saturate(200%) hue-rotate(10deg); /* Makes it look Gold-ish */
 }
 
-#grain-texture {
+#grain-overlay {
     position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
+    top: 0; left: 0; width: 100%; height: 100%;
     background: url('https://www.transparenttextures.com/patterns/natural-paper.png');
-    opacity: 0.3;
+    opacity: 0.4;
     z-index: 2;
     pointer-events: none;
 }
 
-/* Navigation */
 nav {
     position: fixed;
-    top: 0;
-    width: 100%;
+    top: 0; width: 100%;
     display: flex;
     justify-content: space-between;
-    padding: 60px;
+    padding: 50px;
     z-index: 1000;
-    letter-spacing: 5px;
+    letter-spacing: 4px;
     font-size: 10px;
 }
 
 .nav-right a {
     color: var(--navy);
     text-decoration: none;
-    margin-left: 40px;
+    margin-left: 30px;
+    font-weight: 400;
 }
 
-/* Metadata */
 #meta-data {
     position: absolute;
-    top: 150px;
-    left: 60px;
+    top: 130px;
+    left: 50px;
     font-family: 'JetBrains Mono', monospace;
     font-size: 10px;
     line-height: 2.2;
@@ -74,7 +70,6 @@ nav {
 .navy { color: var(--navy); }
 .bio-green { color: var(--bio-green); }
 
-/* Hero */
 #hero-portal {
     height: 100vh;
     display: flex;
@@ -83,55 +78,54 @@ nav {
     position: relative;
 }
 
-.hero-center {
-    z-index: 50;
-    text-align: center;
-    pointer-events: none;
-}
+.hero-center { z-index: 50; text-align: center; pointer-events: none; }
 
 h1 {
-    font-size: clamp(2.5rem, 10vw, 7rem);
+    font-size: clamp(3rem, 11vw, 8rem);
     font-weight: 200;
     text-transform: uppercase;
-    letter-spacing: -3px;
-    line-height: 1;
+    letter-spacing: -4px;
+    line-height: 0.9;
 }
 
 .role-tag {
     font-family: 'JetBrains Mono', monospace;
     font-size: 11px;
-    letter-spacing: 6px;
+    letter-spacing: 5px;
     margin-top: 20px;
 }
 
-/* 3D Container */
-#canvas-container {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    z-index: 5;
-    mix-blend-mode: multiply; /* Makes 3D feel part of the paper texture */
+.press-quote {
+    max-width: 500px;
+    font-size: 13px;
+    font-style: italic;
+    color: var(--gold);
+    margin: 40px auto;
+    line-height: 1.6;
+    font-weight: 200;
 }
 
-/* Mission Section */
-#mission-statement {
+#canvas-container {
+    position: absolute;
+    top: 0; left: 0; width: 100%; height: 100%;
+    z-index: 5;
+    mix-blend-mode: multiply;
+}
+
+#about-section {
     padding: 150px 10%;
-    background: var(--pearl);
     position: relative;
     z-index: 100;
 }
 
 .large-body {
-    font-size: 2.5rem;
+    font-size: 2.2rem;
     font-weight: 200;
-    line-height: 1.2;
-    max-width: 900px;
+    line-height: 1.3;
 }
 
 .section-label {
     font-family: 'JetBrains Mono', monospace;
     font-size: 12px;
-    margin-bottom: 20px;
+    margin-bottom: 30px;
 }
