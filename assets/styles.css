@@ -1,114 +1,112 @@
-/* Color Palette */
-:root {
-    --accent: #00FF41; /* Bio-Green */
-    --bg: #050505;
-    --text-dim: #888;
-}
-
-body {
-    background: var(--bg);
-    color: white;
-    font-family: 'Inter', sans-serif;
+/* RESET */
+* {
     margin: 0;
+    padding: 0;
+    box-sizing: border-box;
 }
 
-/* Institutional Header */
+/* THE FOUNDATION */
+body, html {
+    background-color: #050505 !important; /* Force OLED Black */
+    color: #ffffff !important;
+    font-family: 'Inter', sans-serif;
+    width: 100%;
+    height: 100%;
+    overflow-x: hidden;
+}
+
+/* NAVIGATION - Institutional Style */
 nav {
+    position: fixed;
+    top: 0;
+    width: 100%;
     display: flex;
     justify-content: space-between;
     padding: 40px;
-    position: fixed;
-    width: 100%;
-    z-index: 100;
-    box-sizing: border-box;
-    backdrop-filter: blur(10px);
+    z-index: 1000; /* Ensure it's above the 3D */
+    letter-spacing: 2px;
 }
 
 .nav-right a {
     color: white;
     text-decoration: none;
     font-size: 11px;
-    letter-spacing: 2px;
     margin-left: 30px;
-    font-weight: 200;
+    opacity: 0.7;
+    transition: 0.3s;
 }
 
-/* Hero Content */
-#hero-portal {
+.nav-right a:hover {
+    opacity: 1;
+    color: #00FF41;
+}
+
+/* THE 3D CONTAINER - MUST BE ABSOLUTE */
+#canvas-container {
+    position: fixed; /* Fixed so it stays behind content */
+    top: 0;
+    left: 0;
+    width: 100vw;
     height: 100vh;
+    z-index: 1; /* Lowest layer */
+    background: #050505;
+}
+
+/* HERO SECTION */
+#hero-portal {
+    position: relative;
+    height: 100vh;
+    width: 100%;
     display: flex;
     align-items: center;
     justify-content: center;
-    position: relative;
+    z-index: 10; /* Above the 3D */
+    pointer-events: none; /* Let mouse pass through to 3D */
 }
 
 .hero-center {
-    z-index: 10;
     text-align: center;
-    pointer-events: none;
 }
 
 h1 {
-    font-size: 8vw;
+    font-size: clamp(3rem, 10vw, 7rem);
     font-weight: 200;
     text-transform: uppercase;
     letter-spacing: -2px;
-    margin: 0;
+    line-height: 0.9;
 }
 
 .role-tag {
     font-family: 'JetBrains Mono', monospace;
-    font-size: 12px;
+    font-size: 11px;
     letter-spacing: 4px;
-    color: var(--accent);
-    margin-top: 10px;
+    color: #00FF41;
+    margin-top: 20px;
 }
 
-.press-quote {
-    max-width: 500px;
-    font-size: 14px;
-    font-style: italic;
-    color: var(--text-dim);
-    margin: 30px auto;
-    line-height: 1.6;
-}
-
+/* METADATA OVERLAY */
 #meta-data {
     position: absolute;
     top: 120px;
     left: 40px;
     font-family: 'JetBrains Mono', monospace;
     font-size: 10px;
-    color: var(--text-dim);
-    line-height: 1.8;
+    color: #666;
+    line-height: 2;
+    z-index: 20;
 }
 
-/* Mission Section */
+/* MISSION SECTION */
 #mission-statement {
-    padding: 150px 10%;
-    border-top: 1px solid #222;
-}
-
-.section-label {
-    font-family: 'JetBrains Mono', monospace;
-    font-size: 12px;
-    color: var(--accent);
-    margin-bottom: 30px;
+    position: relative;
+    padding: 200px 10%;
+    background: #050505;
+    z-index: 30; /* Ensures this scrolls over the 3D */
 }
 
 .large-body {
     font-size: 2.2rem;
     font-weight: 200;
     line-height: 1.3;
-    max-width: 1000px;
-}
-
-.cta-link {
-    display: inline-block;
-    margin-top: 40px;
-    color: white;
-    text-decoration: none;
-    border-bottom: 1px solid white;
-    padding-bottom: 5px;
-    font-size: 14px;
+    max-width: 900px;
 }
