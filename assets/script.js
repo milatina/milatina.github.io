@@ -1,59 +1,30 @@
-let scene, camera, renderer, bioCell, outerShell;
-let mouseX = 0, mouseY = 0;
+// Minimal Ring Cursor
+const cursor = document.getElementById('custom-cursor');
+document.addEventListener('mousemove', (e) => {
+    cursor.style.transform = `translate3d(${e.clientX - 12}px, ${e.clientY - 12}px, 0)`;
+});
 
+// Three.js Breathing Geometry
+let scene, camera, renderer, bioCell;
 function init() {
     scene = new THREE.Scene();
     camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
-    
     renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
     renderer.setSize(window.innerWidth, window.innerHeight);
-    renderer.setPixelRatio(window.devicePixelRatio);
-    
-    const container = document.getElementById('canvas-container');
-    if (container) { container.appendChild(renderer.domElement); }
+    document.getElementById('canvas-container').appendChild(renderer.domElement);
 
-    // THE NUCLEUS (Inner Breathing Shell)
-    const coreGeo = new THREE.IcosahedronGeometry(1.6, 1);
-    const coreMat = new THREE.MeshBasicMaterial({ 
-        color: 0xffffff, wireframe: true, transparent: true, opacity: 0.25 
-    });
-    bioCell = new THREE.Mesh(coreGeo, coreMat);
+    const geo = new THREE.IcosahedronGeometry(1.5, 1);
+    const mat = new THREE.MeshBasicMaterial({ color: 0xffffff, wireframe: true, transparent: true, opacity: 0.3 });
+    bioCell = new THREE.Mesh(geo, mat);
     scene.add(bioCell);
-
-    // THE OUTER PULSE
-    const shellGeo = new THREE.SphereGeometry(2.8, 16, 16);
-    const shellMat = new THREE.MeshBasicMaterial({ 
-        color: 0xffffff, wireframe: true, transparent: true, opacity: 0.05 
-    });
-    outerShell = new THREE.Mesh(shellGeo, shellMat);
-    scene.add(outerShell);
-
-    camera.position.z = 6;
+    camera.position.z = 5;
     animate();
 }
-
 function animate() {
     requestAnimationFrame(animate);
-    const time = Date.now() * 0.001;
-    
-    // Smooth Breathing Pulse
-    const pulse = 1 + Math.sin(time * 1.5) * 0.1; 
-    
+    const pulse = 1 + Math.sin(Date.now() * 0.0015) * 0.08;
     bioCell.scale.set(pulse, pulse, pulse);
-    bioCell.rotation.y += 0.002;
-    bioCell.rotation.x += 0.001;
-    
-    outerShell.scale.set(1.2/pulse, 1.2/pulse, 1.2/pulse);
-    outerShell.rotation.y -= 0.001;
-
+    bioCell.rotation.y += 0.003;
     renderer.render(scene, camera);
 }
-
-// Global Interactions
-window.addEventListener('resize', () => {
-    camera.aspect = window.innerWidth / window.innerHeight;
-    camera.updateProjectionMatrix();
-    renderer.setSize(window.innerWidth, window.innerHeight);
-});
-
 init();
