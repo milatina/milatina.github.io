@@ -1,62 +1,87 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>MILA TINA | BioSymphony</title>
-    
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@200;400&family=JetBrains+Mono:wght@200&display=swap" rel="stylesheet">
-    
-    <link rel="stylesheet" href="assets/styles.css">
-    
-    <style>
-        body { background-color: #fcfcf9; } /* Prevents white flash */
-    </style>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>MILA TINA | Interdisciplinary Artist</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@200;300;400;600&family=Playfair+Display:ital,wght@1,400&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="./assets/styles.css" />
 </head>
-<body>
+<body class="somatic-experience">
 
-    <div id="botanical-layer"></div>
-    <div id="grain-overlay"></div>
+  <div class="grain"></div>
 
-    <nav>
-        <div class="logo">MILA TINA</div>
-        <div class="nav-right">
-            <a href="#about">ABOUT</a>
-            <a href="#performance">PROJECTS</a>
-            <a href="#ritmofit">EPK</a>
-            <a href="#contact">CONTACT</a>
-        </div>
+  <div class="video-container">
+    <video autoplay muted loop playsinline class="bg-video">
+      <source src="https://d1yei2z3i6k35z.cloudfront.net/16499233/6996cd3b0e645_milatina-biosymphonybackgroundvideo.mp4" type="video/mp4">
+    </video>
+    <div class="video-overlay"></div>
+  </div>
+
+  <div class="geometry-overlay">
+    <svg viewBox="0 0 100 100" class="breathing-sigil">
+      <circle cx="50" cy="50" r="45" fill="none" stroke="rgba(212, 175, 55, 0.2)" stroke-width="0.5" />
+      <path d="M50 5 L50 95 M5 50 L95 50" stroke="rgba(212, 175, 55, 0.1)" stroke-width="0.2" />
+      <circle cx="50" cy="50" r="20" fill="none" stroke="rgba(212, 175, 55, 0.3)" stroke-width="1" />
+    </svg>
+  </div>
+
+  <header class="art-nav">
+    <div class="brand">MILA TINA</div>
+    <nav class="nav-links">
+      <a href="#profile">ARTIST PROFILE</a>
+      <a href="#projects">PROJECTS</a>
+      <a href="#contact">CONTACT</a>
     </nav>
+  </header>
 
-    <div id="meta-data">
-        <span class="gold">// PROJECT: BioSymphony</span><br>
-        // ROLE: <span class="navy">INTERDISCIPLINARY ARTIST</span><br>
-        // STATUS: <span class="bio-green">STREAMING_LIVE_DATA</span>
+  <main class="horizontal-scroll">
+    <div class="scroll-track">
+      
+      <section class="panel hero-panel">
+        <div class="hero-content">
+          <p class="kicker">LATEST PROJECT</p>
+          <h1 class="main-title">BIOSYMPHONY</h1>
+          <p class="tagline">The body as interface. Emotion as data.</p>
+          <a href="#projects" class="btn-minimal">EXPLORE ARCHIVE —></a>
+        </div>
+      </section>
+
+      <section id="profile" class="panel profile-panel">
+        <div class="dossier-grid">
+          <div class="profile-photo">
+            <img src="https://d1yei2z3i6k35z.cloudfront.net/16499233/6996c56b59878_mila-tina-brain.png" alt="Mila Tina Neural Interface">
+          </div>
+          <div class="profile-text">
+            <div class="meta-row">
+              <span class="label">LOCATION</span><span class="val">WATER MILL, NY</span>
+            </div>
+            <div class="meta-row">
+              <span class="label">PRACTICE</span><span class="val">INTERDISCIPLINARY PERFORMANCE</span>
+            </div>
+            <p class="bio-intro">Mila Tina is a Chilean-American artist operating at the intersection of performance, technology, and somatic inquiry.</p>
+            <p class="bio-full">Through drumming, movement, biometric data, and visual design, she constructs sonic-kinetic systems where the body functions as both medium and message.</p>
+          </div>
+        </div>
+      </section>
+
+      <section id="projects" class="panel list-panel">
+        <h2 class="section-label">PROJECTS</h2>
+        <ul class="project-list">
+          <li><a href="herratic.html">HERRATIC <span class="arrow">-></span></a></li>
+          <li><a href="sapphic-gospel.html">THE SAPPHIC GOSPEL <span class="arrow">-></span></a></li>
+          <li><a href="symbiotrix.html">SYMBIOTRIX <span class="arrow">-></span></a></li>
+          <li><a href="biosymphony.html">BIOSYMPHONY <span class="arrow">-></span></a></li>
+        </ul>
+      </section>
+
     </div>
+  </main>
 
-    <section id="hero-portal">
-        <div class="hero-center">
-            <h1 class="navy">BioSymphony</h1>
-            <p class="role-tag gold">A GENERATIVE NARRATIVE FOR TWO BODIES AND ONE PULSE</p>
-            <p class="press-quote">“... [Mila Tina] is a drumming powerhouse, using her solo performance to tell a story of empowerment for women worldwide… ”</p>
-        </div>
-        <div id="canvas-container"></div>
-    </section>
+  <footer class="footer-meta">
+    FEMININE COGNITION // RHYTHM AS STRUCTURAL LANGUAGE // EMOTION AS DATA
+  </footer>
 
-    <section id="about-section">
-        <div class="content-wrap">
-            <h2 class="section-label gold">// THE VISION</h2>
-            <p class="large-body navy">
-                Mila Tina explores rhythm as a language of memory and presence. 
-                Integrating percussion, martial arts, and real-time bio-data, she constructs 
-                <b>intersubjective landscapes</b> where the body becomes a site of 
-                biological intelligence and digital transmutation.
-            </p>
-        </div>
-    </section>
-
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
-    <script src="assets/script.js"></script>
 </body>
 </html>
