@@ -12,18 +12,18 @@ function init() {
     const container = document.getElementById('canvas-container');
     if (container) { container.appendChild(renderer.domElement); }
 
-    // THE NUCLEUS (Gold/Feminine)
-    const coreGeo = new THREE.IcosahedronGeometry(1.5, 2);
+    // THE NUCLEUS (Inner Breathing Shell)
+    const coreGeo = new THREE.IcosahedronGeometry(1.6, 1);
     const coreMat = new THREE.MeshBasicMaterial({ 
-        color: 0xbda06d, wireframe: true, transparent: true, opacity: 0.4 
+        color: 0xffffff, wireframe: true, transparent: true, opacity: 0.25 
     });
     bioCell = new THREE.Mesh(coreGeo, coreMat);
     scene.add(bioCell);
 
-    // THE SHELL (Navy/Masculine)
-    const shellGeo = new THREE.SphereGeometry(2.8, 32, 32);
+    // THE OUTER PULSE
+    const shellGeo = new THREE.SphereGeometry(2.8, 16, 16);
     const shellMat = new THREE.MeshBasicMaterial({ 
-        color: 0x0a192f, wireframe: true, transparent: true, opacity: 0.15 
+        color: 0xffffff, wireframe: true, transparent: true, opacity: 0.05 
     });
     outerShell = new THREE.Mesh(shellGeo, shellMat);
     scene.add(outerShell);
@@ -34,30 +34,26 @@ function init() {
 
 function animate() {
     requestAnimationFrame(animate);
-    const time = Date.now() * 0.0015;
-    const pulse = 1 + Math.sin(time * 2) * 0.08; 
+    const time = Date.now() * 0.001;
+    
+    // Smooth Breathing Pulse
+    const pulse = 1 + Math.sin(time * 1.5) * 0.1; 
     
     bioCell.scale.set(pulse, pulse, pulse);
-    bioCell.rotation.y += 0.004 + (mouseX * 0.00005);
+    bioCell.rotation.y += 0.002;
+    bioCell.rotation.x += 0.001;
     
-    outerShell.scale.set(1.1/pulse, 1.1/pulse, 1.1/pulse);
-    outerShell.rotation.y -= 0.002;
+    outerShell.scale.set(1.2/pulse, 1.2/pulse, 1.2/pulse);
+    outerShell.rotation.y -= 0.001;
 
     renderer.render(scene, camera);
 }
 
-// Interactivity & Parallax
-window.addEventListener('mousemove', (e) => {
-    mouseX = e.clientX - window.innerWidth / 2;
-    mouseY = e.clientY - window.innerHeight / 2;
-});
-
-window.addEventListener('scroll', () => {
-    const scroll = window.pageYOffset;
-    const botLayer = document.getElementById('botanical-layer');
-    if(botLayer) {
-        botLayer.style.transform = `translateY(${scroll * 0.4}px)`;
-    }
+// Global Interactions
+window.addEventListener('resize', () => {
+    camera.aspect = window.innerWidth / window.innerHeight;
+    camera.updateProjectionMatrix();
+    renderer.setSize(window.innerWidth, window.innerHeight);
 });
 
 init();
