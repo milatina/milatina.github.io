@@ -194,3 +194,83 @@ hr { border: 0; border-top: 1px solid #222; margin: 30px 0; }
 
 
 
+
+
+
+
+
+
+
+/* --- Corrected, Large, Spaced-Out Client Section --- */
+
+.social-proof-section {
+    padding: 180px 10%; /* Massive vertical breathing */
+    background: var(--bg);
+    border-top: 1px solid #1a1a1a;
+    position: relative;
+    z-index: 10;
+}
+
+/* 1. Large, Cinematic Title */
+.social-proof-title {
+    font-size: clamp(3rem, 6vw, 5rem); /* Scalable huge text */
+    font-weight: 200;
+    letter-spacing: -3px;
+    line-height: 1.1;
+    color: var(--white);
+    margin-bottom: 80px; /* Strong space below title */
+}
+
+/* 2. Structured, Spaced-Out Body Text */
+.social-proof-body {
+    font-family: 'JetBrains Mono', monospace; /* Use mono for technical look */
+    font-size: 11px;
+    letter-spacing: 2px;
+    line-height: 2.5; /* Large line-height for air */
+    color: #ccc;
+    max-width: 1000px;
+    margin-bottom: 120px; /* Massive space before logos */
+    text-transform: uppercase;
+}
+
+.social-proof-body strong {
+    color: var(--gold); /* Highlight locations in Gold */
+    font-weight: 400;
+}
+
+/* 3. The Re-Spaced Logo Grid */
+.logo-cloud-grid {
+    display: grid;
+    grid-template-columns: repeat(6, 1fr); /* 6 columns for an even cloud */
+    gap: 80px 60px; /* X and Y gap for maximum breathing */
+    align-items: center;
+    justify-items: center;
+    opacity: 0.6; /* Sophisticated muted look */
+}
+
+.logo-cloud-grid img {
+    max-width: 140px;
+    width: 100%;
+    height: auto;
+    filter: grayscale(1) brightness(1.5); /* Clean grayscale white logos */
+    transition: 0.4s ease;
+}
+
+.logo-cloud-grid img:hover {
+    opacity: 1;
+    filter: grayscale(0) brightness(1); /* Return color on hover */
+    transform: scale(1.05);
+}
+
+/* 4. Mobile Responsiveness */
+@media (max-width: 768px) {
+    .social-proof-section { padding: 100px 6%; }
+    .social-proof-title { font-size: 10vw; letter-spacing: -2px; }
+    .logo-cloud-grid { grid-template-columns: repeat(3, 1fr); gap: 50px 30px; }
+    .logo-cloud-grid img { max-width: 100px; }
+}
+
+
+
+
+
