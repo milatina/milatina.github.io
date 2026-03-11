@@ -4,7 +4,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>MILA TINA | INTERDISCIPLINARY ARTIST</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@200;300;400;600&family=JetBrains+Mono:wght@200;400&display=swap" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
     <link rel="stylesheet" href="assets/styles.css">
 </head>
 <body>
@@ -25,6 +27,9 @@
             </video>
             <div class="video-overlay"></div>
         </div>
+
+        <div id="canvas-container"></div> 
+
         <div class="hero-content">
             <h1>MILA TINA</h1>
             <p class="role-tag">INTERDISCIPLINARY ARTIST</p>
@@ -51,7 +56,7 @@
                 <hr>
                 <div class="bio-block">
                     <span class="mono-label">BIO</span>
-                    <p>Mila Tina is a Chilean-American interdisciplinary artist whose work operates at the intersection of performance, technology, and somatic inquiry. Through drumming, movement, biometric data, and visual design, she constructs sonic-kinetic systems where the body functions as both medium and message. Her performances explore rhythm as memory, tension as structure, and emotional complexity as compositional intelligence, disrupting binary narratives around gender, control, and perception.</p>
+                    <p>Mila Tina is a Chilean-American interdisciplinary artist whose work operates at the intersection of performance, technology, and somatic inquiry. Through drumming, movement, biometric data, and visual design, she constructs sonic-kinetic systems where the body functions as both medium and message.</p>
                 </div>
             </div>
         </div>
@@ -64,7 +69,7 @@
             <div class="project-header"><span class="mono">08</span><h3>HERRATIC</h3></div>
             <div class="project-details">
                 <div class="detail-row"><span class="mono">TYPE</span><p>Multidisciplinary Live Performance</p></div>
-                <div class="detail-row"><span class="mono">OVERVIEW</span><p>A multidisciplinary solo work integrating live percussion, movement, and media. Interrogates femininity and rearticulates emotional complexity.</p></div>
+                <div class="detail-row"><span class="mono">OVERVIEW</span><p>A multidisciplinary solo work integrating live percussion, movement, and time-based media.</p></div>
                 <div class="detail-row"><span class="mono">FEATURES</span><p>Bay Street Theater, Parrish Art Museum, Southampton Arts Center.</p></div>
             </div>
         </article>
@@ -73,7 +78,7 @@
             <div class="project-header"><span class="mono">09</span><h3>THE SAPPHIC GOSPEL</h3></div>
             <div class="project-details">
                 <div class="detail-row"><span class="mono">TYPE</span><p>Mixed Media Performance + Living Archive</p></div>
-                <div class="detail-row"><span class="mono">OVERVIEW</span><p>Cinematic installation reclaiming erased stories of queer women through sound and film.</p></div>
+                <div class="detail-row"><span class="mono">OVERVIEW</span><p>A cinematic installation reclaiming erased stories of queer women through sound and film.</p></div>
                 <div class="detail-row"><span class="mono">DEVELOPED AT</span><p>The Church, Sag Harbor Residency</p></div>
             </div>
         </article>
@@ -91,7 +96,7 @@
             <div class="project-header"><span class="mono">11</span><h3>BIOSYMPHONY</h3></div>
             <div class="project-details">
                 <div class="detail-row"><span class="mono">TYPE</span><p>Bio-Data Performance / Responsive Installation</p></div>
-                <div class="detail-row"><span class="mono">OVERVIEW</span><p>Real-time biometric data including heart rate and brainwaves drive a live soundscape and visual environment.</p></div>
+                <div class="detail-row"><span class="mono">OVERVIEW</span><p>Real-time biometric data including heart rate and brainwaves drive a live soundscape.</p></div>
                 <div class="detail-row"><span class="mono">STATUS</span><p>Development Mode // Subject Alpha & Beta</p></div>
             </div>
         </article>
@@ -99,12 +104,11 @@
 
     <section class="social-proof-section">
         <h2 class="social-proof-title">AS SEEN ON <br>GLOBAL STAGES AND EXCLUSIVE EVENTS.</h2>
-        <p class="social-proof-body">Mila Tina has headlined and performed at festivals around the world, including Envision Festival (Costa Rica), Palm Tree Music Festival, and Miami Art Basel.</p>
+        <p class="social-proof-body">Mila Tina has headlined stages for T-Mobile, Citibank, and Envision Festival.</p>
         <div class="logo-cloud-grid">
             <img src="path-to-nyfw.png" alt="NYFW">
             <img src="path-to-artbasel.png" alt="Art Basel">
             <img src="path-to-tmobile.png" alt="T-Mobile">
-            <img src="path-to-nycpride.png" alt="NYC Pride">
         </div>
     </section>
 
@@ -118,5 +122,39 @@
         <a href="mailto:pulse@milatina.io" class="contact-email-link">pulse@milatina.io</a>
     </section>
 
+    <script>
+        const container = document.getElementById('canvas-container');
+        const scene = new THREE.Scene();
+        const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
+        const renderer = new THREE.WebGLRenderer({ alpha: true, antialias: true });
+        renderer.setSize(window.innerWidth, window.innerHeight);
+        container.appendChild(renderer.domElement);
+
+        const group = new THREE.Group();
+        scene.add(group);
+
+        const material = new THREE.MeshBasicMaterial({ color: 0xbda06d, wireframe: true, transparent: true, opacity: 0.25 });
+        const shape1 = new THREE.Mesh(new THREE.IcosahedronGeometry(1.5, 2), material);
+        const shape2 = new THREE.Mesh(new THREE.IcosahedronGeometry(2.5, 1), material);
+        group.add(shape1, shape2);
+
+        camera.position.z = 5;
+
+        function animate() {
+            requestAnimationFrame(animate);
+            const time = Date.now() * 0.001;
+            const breath = 1 + Math.sin(time * 0.7) * 0.1;
+            shape1.scale.set(breath, breath, breath);
+            shape1.rotation.y += 0.003;
+            shape2.rotation.y -= 0.001;
+            renderer.render(scene, camera);
+        }
+        window.addEventListener('resize', () => {
+            camera.aspect = window.innerWidth / window.innerHeight;
+            camera.updateProjectionMatrix();
+            renderer.setSize(window.innerWidth, window.innerHeight);
+        });
+        animate();
+    </script>
 </body>
 </html>
