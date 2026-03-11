@@ -148,51 +148,86 @@ hr { border: 0; border-top: 1px solid #222; margin: 30px 0; }
 
 
 
+/* --- High-End Portal Contact Section --- */
 
-/* INQUIRY FORM STYLING */
-.contact-container { max-width: 800px; margin: 0 auto; z-index: 10; position: relative; }
+#contact {
+    padding: 160px 10%; 
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
 
-.inquiry-form { margin-top: 40px; }
+/* 1. Large Header with Breathing Room */
+.contact-header-title {
+    font-size: clamp(3.5rem, 7vw, 6rem);
+    font-weight: 200;
+    letter-spacing: -2px;
+    margin-bottom: 80px; /* Space between title and form */
+}
 
-.form-row { margin-bottom: 30px; border-bottom: 1px solid #222; padding-bottom: 10px; }
+.inquiry-form {
+    width: 100%;
+    max-width: 700px; /* Keeps the form elegant and centered */
+}
 
+/* 2. Spaced Rows */
+.form-row {
+    margin-bottom: 60px; /* Massive gap between each question */
+    text-align: left;
+    border-bottom: 1px solid rgba(255,255,255,0.1);
+    padding-bottom: 15px;
+}
+
+/* 3. Refined Labels */
+.form-row label {
+    display: block;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 4px;
+    color: var(--dim);
+    margin-bottom: 20px; /* Space between "SELECT PATHWAY" and the actual menu */
+    text-transform: uppercase;
+}
+
+/* 4. Invisible / Minimalist Inputs */
 .mono-select, .mono-input {
     background: transparent;
     border: none;
     color: var(--white);
-    font-family: 'JetBrains Mono', monospace;
-    font-size: 14px;
+    font-family: 'Inter', sans-serif; /* Use Inter for the actual typing for better legibility */
+    font-size: 18px;
+    font-weight: 300;
     width: 100%;
-    padding: 10px 0;
     outline: none;
-    text-transform: uppercase;
-    letter-spacing: 2px;
+    cursor: pointer;
 }
 
-/* Style the dropdown options for dark mode */
-.mono-select option { background: #111; color: white; }
+/* Remove default arrow for cleaner look on Chrome/Safari */
+.mono-select {
+    appearance: none;
+    -webkit-appearance: none;
+}
 
-.massive-contact-link {
+/* 5. The "Send Pulse" Button - Floating & Large */
+.massive-submit {
     background: transparent;
-    border: none;
-    font-size: clamp(3rem, 8vw, 5rem);
+    border: 1px solid rgba(255,255,255,0.2);
     color: white;
-    cursor: pointer; /* This will be overridden by your custom cursor logic */
-    transition: 0.4s;
-    font-weight: 200;
-    display: block;
-    width: 100%;
-    margin: 40px 0;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 12px;
+    letter-spacing: 5px;
+    padding: 25px 60px;
+    margin-top: 40px;
+    transition: 0.5s all;
+    text-transform: uppercase;
 }
 
-.massive-contact-link:hover { color: var(--gold); transform: italic; }
-
-@media (max-width: 768px) {
-    .massive-contact-link { font-size: 2.5rem; }
+.massive-submit:hover {
+    border-color: var(--gold);
+    color: var(--gold);
+    letter-spacing: 8px; /* Subtle expansion on hover */
 }
-}
-
-
 
 
 
