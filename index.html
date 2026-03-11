@@ -122,39 +122,6 @@
         <a href="mailto:pulse@milatina.io" class="contact-email-link">pulse@milatina.io</a>
     </section>
 
-    <script>
-        const container = document.getElementById('canvas-container');
-        const scene = new THREE.Scene();
-        const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
-        const renderer = new THREE.WebGLRenderer({ alpha: true, antialias: true });
-        renderer.setSize(window.innerWidth, window.innerHeight);
-        container.appendChild(renderer.domElement);
-
-        const group = new THREE.Group();
-        scene.add(group);
-
-        const material = new THREE.MeshBasicMaterial({ color: 0xbda06d, wireframe: true, transparent: true, opacity: 0.25 });
-        const shape1 = new THREE.Mesh(new THREE.IcosahedronGeometry(1.5, 2), material);
-        const shape2 = new THREE.Mesh(new THREE.IcosahedronGeometry(2.5, 1), material);
-        group.add(shape1, shape2);
-
-        camera.position.z = 5;
-
-        function animate() {
-            requestAnimationFrame(animate);
-            const time = Date.now() * 0.001;
-            const breath = 1 + Math.sin(time * 0.7) * 0.1;
-            shape1.scale.set(breath, breath, breath);
-            shape1.rotation.y += 0.003;
-            shape2.rotation.y -= 0.001;
-            renderer.render(scene, camera);
-        }
-        window.addEventListener('resize', () => {
-            camera.aspect = window.innerWidth / window.innerHeight;
-            camera.updateProjectionMatrix();
-            renderer.setSize(window.innerWidth, window.innerHeight);
-        });
-        animate();
-    </script>
+       <script src="assets/script.js"></script>
 </body>
 </html>
