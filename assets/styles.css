@@ -102,3 +102,49 @@ hr { border: 0; border-top: 1px solid #222; margin: 30px 0; }
     .detail-row { grid-template-columns: 1fr; gap: 5px; }
     h1 { font-size: 15vw; }
 }
+
+
+
+
+
+
+/* PERFORMANCE DECK SPECIFIC STYLES */
+.section-label { margin-bottom: 60px; color: var(--dim); }
+
+.offering-block { 
+    margin-bottom: 80px; 
+    border-bottom: 1px solid #111; 
+    padding-bottom: 40px; 
+}
+.offering-header { display: flex; align-items: baseline; margin-bottom: 20px; }
+.offering-header h3 { font-size: 3rem; font-weight: 200; margin-left: 20px; letter-spacing: -1px; color: var(--gold); }
+.offering-desc { font-size: 1.1rem; font-weight: 300; max-width: 800px; color: #ccc; }
+
+.as-seen-text { 
+    font-size: 1.2rem; 
+    font-weight: 200; 
+    margin: 40px 0; 
+    line-height: 1.6; 
+    max-width: 900px; 
+}
+
+/* LOGO GRID */
+.logo-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+    gap: 60px;
+    align-items: center;
+    padding-top: 50px;
+    filter: grayscale(1) invert(1); /* Makes black logos white for dark mode */
+    opacity: 0.6;
+}
+.logo-grid img { width: 100%; height: auto; transition: 0.3s; }
+.logo-grid img:hover { opacity: 1; filter: grayscale(0) invert(0); }
+
+@media (max-width: 768px) {
+    .offering-header h3 { font-size: 2rem; }
+    .logo-grid { grid-template-columns: 1fr 1fr; gap: 30px; }
+}
+
+
+
